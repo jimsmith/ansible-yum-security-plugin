@@ -1,0 +1,4 @@
+%YAML 1.2
+---
+yum_security_plugin_install_latest: false
+...

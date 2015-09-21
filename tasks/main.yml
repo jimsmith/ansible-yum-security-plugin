@@ -1,0 +1,13 @@
+%YAML 1.2
+---
+
+- name: Set which version we should use depending on OS
+  set_fact:
+    yum_security_plugin_pkg_name: "{{ 'yum-plugin-security' if ansible_distribution_version | version_compare('6', '>=') else 'yum-security' }}"
+
+- name: Install the yum security plugin
+  yum:
+    name: "{{ yum_security_plugin_pkg_name }}"
+    state:  "{{ 'latest' if yum_security_plugin_install_latest else 'present' }}"
+  when: ansible_pkg_mgr == 'yum'
+...
